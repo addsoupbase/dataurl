@@ -341,7 +341,7 @@
         async function loadUrls(urls) {
             for (let o of urls) {
                 let data;
-                let a = gen(), a2 = gen(), a3 = gen(), a4 = gen(), a5 = gen(), a6 = gen()
+                let a = ran.gen(), a2 = ran.gen(), a3 = ran.gen(), a4 = ran.gen(), a5 = ran.gen(), a6 = ran.gen()
                 let outer = new Elem({
                     tag: 'div',
                     parent: r,
@@ -408,7 +408,7 @@
         async function loadFiles(files) {
             let urls = []
             for (let file of files) {
-                let a2 = gen(), a = gen(), a3 = gen(), a4 = gen(), a5 = gen();
+                let a2 = ran.gen(), a = ran.gen(), a3 = ran.gen(), a4 = ran.gen(), a5 = ran.gen();
                 let outer = new Elem({
                     tag: 'div',
                     parent: r,
@@ -538,12 +538,12 @@
                     nelem.value = atob(data.split(',').pop())
                 }
 
-                mainContent.replaceWith(new Elem({ tag: 'kbd', text: `.${fileName.split('.').pop().shorten(4)} file` }))
+                mainContent.replaceWith(new Elem({ tag: 'kbd', text: `.${utilString.shorten(fileName.split('.').pop(),4)} file` }))
                 viewButton.addevent({
                     click() {
                         let win = open()
-                        let clone = nelem.clone(true).content
-                        win.document.body.appendChild(clone)
+                   //     let clone = nelem.clone(true).content
+                        win.document.body.appendChild(nelem.content)
                     }
                 })
             }
