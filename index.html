@@ -489,7 +489,7 @@
         })
         hint.hide()
         function finish({ data, viewButton, mainContent, fileName }) {
-            if (data.match(/image\/[webp|jpg|jpeg|png|svg|gif|apng|avif|bmp|ico|tiff]/)) {
+            if (data.match(/image\/webp|jpg|jpeg|png|svg|gif|apng|avif|bmp|ico|tiff/)) {
                 viewButton.addevent({
                     click() {
                         let w = open()
@@ -511,7 +511,7 @@
             } else {
                 let nelem;
                 let text = false;
-                if (data.match(/audio\/[mp3|3pg|adts|flac|ogg]/)) {
+                if (data.match(/audio\/mp3|3pg|adts|flac|ogg/)) {
 
                     nelem = new Elem({
                         tag: 'audio', controls: true, autobuffer: true, children: [
@@ -519,7 +519,7 @@
                         ]
                     })
                 }
-                else if (data.match(/video\/[webm|mp4|mpeg]/)) {
+                else if (data.match(/video\/webm|mp4|mpeg|mov/)) {
                     nelem = new Elem({
                         tag: 'video', controls: true, autobuffer: true, children: [
                             new Elem({ tag: 'source', src: data })
