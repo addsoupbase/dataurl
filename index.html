@@ -373,14 +373,14 @@
                 catch (e) {
                     result.styleMe({ color: 'darkred' })
                     result.innerHTML = '(failed)'
-                    Elem['#' + a2].kill()
-                    Elem['#' + a6].kill()
+                    _('#' + a2).kill()
+                    _('#' + a6).kill()
 
                     continue
                 }
-                let image = Elem['#' + a2]
+                let image = _('#' + a2)
 
-                let download = Elem['#' + a3]
+                let download = _('#' + a3)
                 download.addevent({
                     click() {
                         let _blob = new Blob([data], { type: 'text/plain' })
@@ -397,7 +397,7 @@
                 image.removeClass('loader')
                 finish({
                     data,
-                    viewButton: Elem['#' + a5],
+                    viewButton: _('#' + a5),
                     mainContent: image,
                     fileName: o
 
@@ -441,9 +441,9 @@
                 let reader = new FileReader
                 reader.onload = e => {
                     let dataUrl = e.target.result
-                    let out = Elem['#' + a2]
+                    let out = _(a2)
                     out.removeClass('loader')
-                    let download = Elem['#' + a3]
+                    let download = _(a3)
                     download.addevent({
                         click() {
                             let _blob = new Blob([dataUrl], { type: 'text/plain' })
@@ -458,8 +458,8 @@
                         }
                     })
 
-                    let view = Elem['#' + a5],
-                        copy = Elem['#' + a4]
+                    let view = _(a5),
+                        copy = _(a4)
                     copy.addevent({
                         click: async function () {
                             await navigator.clipboard.writeText(dataUrl)
