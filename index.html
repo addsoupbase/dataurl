@@ -149,7 +149,7 @@
         .loader:before,
         .loader:after {
             background:
-            radial-gradient(closest-side at 50% 12.5%, #dc9e9e 96%, #0000) 50% 0 / 20% 80% repeat-y, radial-gradient(closest-side at 12.5% 50%, #ffffff 96%, #0000) 0 50% / 80% 20% repeat-x
+                radial-gradient(closest-side at 50% 12.5%, #dc9e9e 96%, #0000) 50% 0 / 20% 80% repeat-y, radial-gradient(closest-side at 12.5% 50%, #ffffff 96%, #0000) 0 50% / 80% 20% repeat-x
         }
 
         .loader:before,
@@ -235,6 +235,19 @@
             text-align: center;
             font-size: 30px
         }
+
+        .heart {
+            width: 50px;
+            height: 50px;
+            background-image: url('heart.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            color:pink;   
+            position: absolute;
+            z-index: -1;
+            opacity: 0.5;
+            filter: invert(83%) sepia(37%) saturate(1309%) hue-rotate(301deg) brightness(97%) contrast(103%);
+        }
     </style>
 </head>
 
@@ -242,8 +255,17 @@
     <script src="https://addsoupbase.github.io/favourites/utils.js">
     </script>
     <script>
-        //   document.body.style.zoom = '70%'
-        function separate(txt) {
+'use strict';
+for (let i = 10; --i;) {
+    new Elem({tag:'div',class:['heart'],parent:body,styles: {
+    transform: `rotate(${ran.range(0,360)}deg)`,
+    top: `${ran.range(0,100)}%`,
+    left: `${ran.range(0,100)}%`,
+
+}});
+}
+
+function separate(txt) {
             return txt.split('\n').filter(line => line.trim() !== '')
         }
         let mai = new Elem({
@@ -252,9 +274,9 @@
                 'overflow-y': 'scroll',
                 'height': '95vh',
                 'scrollbar-color': '#ff6b81 #FFF',
-    width: '100%',
-    'justify-items': 'center',
-    'text-align': 'center',
+                width: '100%',
+                'justify-items': 'center',
+                'text-align': 'center',
 
             }
         })
@@ -331,6 +353,7 @@
                 'border-width': '2px',
                 'padding': '10px',
                 'border-style': 'solid',
+                'background-color': `rgb(230, 96, 116)`,
                 'scrollbar-color': '#FFFFFF #ff6b81',
                 'max-height': '400px'
 
@@ -536,11 +559,11 @@
                     nelem.value = atob(data.split(',').pop())
                 }
 
-                mainContent.replaceWith(new Elem({ tag: 'kbd', text: `.${utilString.shorten(fileName.split('.').pop(),4)} file` }))
+                mainContent.replaceWith(new Elem({ tag: 'kbd', text: `.${utilString.shorten(fileName.split('.').pop(), 4)} file` }))
                 viewButton.addevent({
                     click() {
                         let win = open()
-                   //     let clone = nelem.clone(true).content
+                        //     let clone = nelem.clone(true).content
                         win.document.body.appendChild(nelem.content)
                     }
                 })
