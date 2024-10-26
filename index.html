@@ -549,14 +549,14 @@ function separate(txt) {
                 }
                 else {
                     nelem = new Elem({
-                        tag: 'textarea',
+                        tag: 'pre',
                         readonly: 'true', styles: {
                             width: '300px',
                             height: '300px',
                         }
                     })
                     nelem.content.setAttribute('readonly', true)
-                    nelem.value = atob(data.split(',').pop())
+                    nelem.textContent = atob(data.split(',').pop())
                 }
 
                 mainContent.replaceWith(new Elem({ tag: 'kbd', text: `.${utilString.shorten(fileName.split('.').pop(), 4)} file` }))
