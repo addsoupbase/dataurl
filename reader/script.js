@@ -35,11 +35,11 @@ let upload = new Elem({
                         }
                         let filetype = text.split(';')[0].replace('data:', '')
 
-                        let win = open()
                         let blob = dataURLToBlob(text)
                         let url = URL.createObjectURL(blob).trim()
+                        let win = open(url)
                         let element;
-                        if (filetype.match(Elem.formats.image)) {
+                       /* if (filetype.match(Elem.formats.image)) {
                             element = document.createElement('img')
                             element.src = url
                         }
@@ -64,8 +64,8 @@ let upload = new Elem({
                                 source.type = filetype
                                 element.appendChild(source)
                             
-                        }
-                        win.document.body.appendChild(element)
+                        }*/
+                        //win.document.body.appendChild(element)
 
                        // alert(img.src)
                         element.onload = () => URL.revokeObjectURL(url)
