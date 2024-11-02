@@ -10,7 +10,7 @@ new Elem({
         'font-weight': 'bold'
     }
 })
-let force = new Elem({tag:'input',parent:main,class:['cute-input'],placeholder:'Force file extension'})
+let force = new Elem({tag:'input',parent:main,class:['cute-input'],placeholder:'Force file extension?'})
 
 let div = new Elem({ tag: 'div', parent: main })
 let upload = new Elem({
