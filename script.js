@@ -161,6 +161,10 @@ async function loadUrls(urls) {
                 anchor.click()
             }
         })
+        let copy = _('#'+a4)
+        copy.addevent({async click(){
+            await navigator.clipboard.writeText(data)
+        }})
         result.kill()
 
         image.removeClass('loader')

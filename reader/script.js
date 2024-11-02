@@ -10,6 +10,8 @@ new Elem({
         'font-weight': 'bold'
     }
 })
+let force = new Elem({tag:'input',parent:main,class:['cute-input'],placeholder:'Force file extension'})
+
 let div = new Elem({ tag: 'div', parent: main })
 let upload = new Elem({
     tag: 'button', class: ['cute-button'], parent: div,
@@ -27,14 +29,19 @@ let upload = new Elem({
 
                     let f = (a.target.files[0])
                     let reader = new FileReader
+                    let foe = force.value
+                   
                     reader.onload = data => {
                         let text = data.target.result
+                      
                         if (!text.startsWith('data')) {
                             err.show()
                             return err.anim({class:'shake'})
                         }
-                        let filetype = text.split(';')[0].replace('data:', '')
-
+                        let filetype = text.split(';')[0].replace('data:', '').split('/')[1]
+                        if (foe) {
+                        text = text.replace(filetype,foe)
+                        }
                         let blob = dataURLToBlob(text)
                         let url = URL.createObjectURL(blob).trim()
                         let win = open(url)
