@@ -66,9 +66,11 @@ let input = new Elem({
 let inputButton = new Elem({
     class: ['cute-button'], tag: 'button', text: 'Get from urls (might not work)', parent: 'main', events: {
         click() {
-
+          
             let text = input.value
             if (!text) return input.anim({ class: 'shake' });
+            copyAllAsOneBigJSONObjectThing.show()
+            copyAllAsOneBigJSONObjectThing.fadeIn()
             loadUrls(separate(text))
         }
     }
@@ -78,7 +80,8 @@ new Elem({ tag: 'p', parent: 'main', text: 'OR' })
 let upload = new Elem({
     events: {
         change(e) {
-
+            copyAllAsOneBigJSONObjectThing.show()
+            copyAllAsOneBigJSONObjectThing.fadeIn()
             loadFiles(e.target.files)
         }
     },
@@ -91,6 +94,15 @@ let fileButton = new Elem({
         }
     }
 })
+let copyAllAsOneBigJSONObjectThing = new Elem({
+    events: {
+        click(){
+            navigator.clipboard.writeText(JSON.stringify(asJSON))
+        }
+    },
+    text:"Open all as JSON",tag:'button',class:['cute-button'],parent:'main'})
+copyAllAsOneBigJSONObjectThing.hide()
+let asJSON = []
 let r = new Elem({
     tag: 'div', parent: 'main', id: 'urlresults', styles: {
         'text-align': 'center',
@@ -138,7 +150,10 @@ async function loadUrls(urls) {
             ], id: a
         })
         let result = new Elem({ tag: 'p', styles: { 'font-size': '20px' }, text: ``, parent: a })
-        try { data = await getDataUrl(o) }
+        try { data = await getDataUrl(o);
+            asJSON.push(data)
+
+         }
         catch (e) {
             result.styleMe({ color: 'darkred' })
             result.innerHTML = '(failed)'
@@ -215,6 +230,7 @@ async function loadFiles(files) {
         reader.onload = e => {
             let dataUrl = e.target.result
             let out = _(a2)
+            asJSON.push(dataUrl)
             out.removeClass('loader')
             let download = _(a3)
             download.addevent({
