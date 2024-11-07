@@ -1,5 +1,5 @@
-'use strict';   
-for (let i = 10; --i;) {
+'use strict';
+/*for (let i = 10; --i;) {
     new Elem({
         tag: 'div', class: ['heart'], parent: body, styles: {
             transform: `rotate(${ran.range(0, 360)}deg)`,
@@ -7,7 +7,7 @@ for (let i = 10; --i;) {
             left: `${ran.range(0, 100)}%`,
         }
     });
-}
+}*/
 
 function separate(txt) {
     return txt.split('\n').filter(line => line.trim() !== '')
@@ -40,10 +40,12 @@ let asinds = new Elem({
     }
 })
 let desc = new Elem({ tag: 'h1', parent: asinds, text: 'File → DATAurl' })
-new Elem({tag:'a',parent:asinds,
-    styles:{
-        'font-family':'monospace'
-    },text:'View DataURL here',href:'https://addsoupbase.github.io/dataurl/reader'})
+new Elem({
+    tag: 'a', parent: asinds,
+    styles: {
+        'font-family': 'monospace'
+    }, text: 'View DataURL here', href: 'https://addsoupbase.github.io/dataurl/reader'
+})
 new Elem({
     tag: 'button', class: ['huh'], parent: body,
     title: 'Help',
@@ -66,7 +68,7 @@ let input = new Elem({
 let inputButton = new Elem({
     class: ['cute-button'], tag: 'button', text: 'Get from urls (might not work)', parent: 'main', events: {
         click() {
-          
+
             let text = input.value
             if (!text) return input.anim({ class: 'shake' });
             copyAllAsOneBigJSONObjectThing.show()
@@ -96,11 +98,12 @@ let fileButton = new Elem({
 })
 let copyAllAsOneBigJSONObjectThing = new Elem({
     events: {
-        click(){
+        click() {
             navigator.clipboard.writeText(JSON.stringify(asJSON))
         }
     },
-    text:"Open all as JSON",tag:'button',class:['cute-button'],parent:'main'})
+    text: "Open all as JSON", tag: 'button', class: ['cute-button'], parent: 'main'
+})
 copyAllAsOneBigJSONObjectThing.hide()
 let asJSON = []
 let r = new Elem({
@@ -150,10 +153,11 @@ async function loadUrls(urls) {
             ], id: a
         })
         let result = new Elem({ tag: 'p', styles: { 'font-size': '20px' }, text: ``, parent: a })
-        try { data = await getDataUrl(o);
+        try {
+            data = await getDataUrl(o);
             asJSON.push(data)
 
-         }
+        }
         catch (e) {
             result.styleMe({ color: 'darkred' })
             result.innerHTML = '(failed)'
@@ -176,10 +180,12 @@ async function loadUrls(urls) {
                 anchor.click()
             }
         })
-        let copy = _('#'+a4)
-        copy.addevent({async click(){
-            await navigator.clipboard.writeText(data)
-        }})
+        let copy = _('#' + a4)
+        copy.addevent({
+            async click() {
+                await navigator.clipboard.writeText(data)
+            }
+        })
         result.kill()
 
         image.removeClass('loader')
